@@ -88,7 +88,7 @@ async function getNewFoodImg() {
   let response = await fetch("https://foodish-api.herokuapp.com/api");
   let data = await response.json();
   console.log(data);
-  // foodImg.src = ??? // <--- 👈 update your code here
+  foodImg.src = data.image
 }
 
 // EVENT LISTENERS
@@ -256,8 +256,8 @@ const digiBtn3 = document.querySelector("#digiBtn3");
 
 // ASYNC/AWAIT
 async function getDigimonImg3() {
-  // let name = ???;  // <--- 👈 update your code here  // set this variable equal to digiInput3's value property
-  let response = await fetch(`https://digimon-api.vercel.app/api/digimon/name/Argumon`); // <--- 👈 update your code here
+  let name = digiInput3.value  // <--- 👈 update your code here  // set this variable equal to digiInput3's value property
+  let response = await fetch(`https://digimon-api.vercel.app/api/digimon/name/${name}`); // <--- 👈 update your code here
   let data = await response.json();
   console.log(data);
   digiImg3.src = data[0].img;
@@ -372,6 +372,9 @@ const digiBtn4 = document.querySelector("#digiBtn4");
 async function createDigimonDropDownList() {
   let response = await fetch(`https://digimon-api.vercel.app/api/digimon`); // fetchs a list of all digimon
   let data = await response.json();
+  console.log(data)
+  let list = data.map((data)=>data.name )
+  console.log(list)
   // let list = ??? // 👈 update your code here // use the map method to create a new array that only has digimon's name
   digiList4.innerHTML = list.map((digimon) => `<option value=${digimon}>${digimon}</option>`); // creates dropdown list options from an array that only has the digimon's name
 }
